@@ -31,16 +31,16 @@ public class IMDBRequestController {
 
     @GetMapping("/equal-director-writer-alive")
     public List<Title_Crew> getEqualDirectorWriterAndlive() {
-        return movieService.getSameDirectorWriterAlive();
+        return requestCounterService.getSameDirectorWriterAlive();
     }
 
     @GetMapping("/actors")
     public List<Name_Basics> getTitlesByActors(@RequestParam String actor1, @RequestParam String actor2) {
-        return movieService.getTitlesByActors(actor1, actor2);
+        return requestCounterService.getTitlesByActors(actor1, actor2);
     }
 
     @GetMapping("/genre")
     public List<Title_Ratings> getBestTitlesByGenre(@RequestParam String genre) {
-        return movieService.getBestTitlesByGenre(genre);
+        return requestCounterService.getBestTitlesByGenre(genre);
     }
 }

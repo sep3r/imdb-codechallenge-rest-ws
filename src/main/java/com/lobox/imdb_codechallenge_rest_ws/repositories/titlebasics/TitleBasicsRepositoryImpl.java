@@ -20,7 +20,6 @@ public class TitleBasicsRepositoryImpl extends BaseRepository implements TitleBa
         try {
             // Read all lines from the file into a list
             lines = Files.readAllLines(filePath);
-            System.out.println("TitleBasicsRepositoryImpl");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -20,7 +20,6 @@ public class TitleAkasRepositoryImpl extends BaseRepository implements TitleAkas
         try {
             // Read all lines from the file into a list
             lines = Files.readAllLines(filePath);
-            System.out.println("TitleAkasRepositoryImpl");
         } catch (IOException e) {
             e.printStackTrace();
         }

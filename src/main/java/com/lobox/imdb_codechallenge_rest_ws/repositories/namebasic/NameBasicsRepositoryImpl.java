@@ -23,7 +23,6 @@ public class NameBasicsRepositoryImpl extends BaseRepository implements NameBasi
         try {
             // Read all lines from the file into a list
             lines = Files.readAllLines(filePath);
-            System.out.println("NameBasicsRepositoryImpl");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -19,7 +19,6 @@ public class TitleEpisodeRepositoryImpl implements TitleEpisodeRepository {
         try {
             // Read all lines from the file into a list
             lines = Files.readAllLines(filePath);
-            System.out.println("TitleCrewRepositoryImpl");
         } catch (IOException e) {
             e.printStackTrace();
         }

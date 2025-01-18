@@ -1,6 +1,5 @@
-package com.lobox.imdb_codechallenge_rest_ws.repositories.titleakas;
+package com.lobox.imdb_codechallenge_rest_ws.repositories.titlecrew;
 
-import com.lobox.imdb_codechallenge_rest_ws.repositories.BaseRepository;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
@@ -10,17 +9,17 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @Repository
-public class TitleAkasRepositoryImpl extends BaseRepository implements TitleAkasRepository {
+public class TitleCrewRepositoryImpl implements TitleCrewRepository {
 
-    private static final String path = "src/main/resources/title.akas.tsv";
+    private final static String path = "src/main/resources/title.crew.tsv";
     private static List<String> lines;
 
-    public TitleAkasRepositoryImpl() {
+    public TitleCrewRepositoryImpl() {
         Path filePath = Paths.get(path);
         try {
             // Read all lines from the file into a list
             lines = Files.readAllLines(filePath);
-            System.out.println("TitleAkasRepositoryImpl");
+            System.out.println("TitleCrewRepositoryImpl");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -12,13 +12,15 @@ import java.util.List;
 @Repository
 public class TitleBasicsRepositoryImpl extends BaseRepository implements TitleBasicsRepository {
 
+    private final static String path = "src/main/resources/title.basics.tsv";
     private static List<String> lines;
 
     public TitleBasicsRepositoryImpl() {
-        Path filePath = Paths.get("src/main/resources/title.basics.tsv");
+        Path filePath = Paths.get(path);
         try {
             // Read all lines from the file into a list
             lines = Files.readAllLines(filePath);
+            System.out.println("TitleBasicsRepositoryImpl");
         } catch (IOException e) {
             e.printStackTrace();
         }

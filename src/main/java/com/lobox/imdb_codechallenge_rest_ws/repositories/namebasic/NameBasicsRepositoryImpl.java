@@ -15,13 +15,15 @@ import java.util.List;
 @Repository
 public class NameBasicsRepositoryImpl extends BaseRepository implements NameBasicsRepository {
 
+    private static final String path = "src/main/resources/name.basics.tsv";
     private static List<String> lines;
 
     public NameBasicsRepositoryImpl() {
-        Path filePath = Paths.get("src/main/resources/name.basics.tsv");
+        Path filePath = Paths.get(path);
         try {
             // Read all lines from the file into a list
             lines = Files.readAllLines(filePath);
+            System.out.println("NameBasicsRepositoryImpl");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -10,12 +10,12 @@ public class RequestCountRepositoryImpl implements RequestCounterRepository{
     private RequestCount requestCount = new RequestCount();
 
     @Override
-    public void addRequestCounter() {
-        requestCount.setCounter();
+    public void addRequestCount() {
+        requestCount.addCount();
     }
 
     @Override
-    public Integer getRequestCounter() {
-        return requestCount.getCounter();
+    public Integer getRequestCount() {
+        return requestCount.getCount();
     }
 }

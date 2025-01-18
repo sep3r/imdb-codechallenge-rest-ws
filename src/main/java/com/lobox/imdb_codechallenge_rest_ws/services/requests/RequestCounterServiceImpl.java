@@ -10,17 +10,21 @@ import org.springframework.stereotype.Service;
 public class RequestCounterServiceImpl implements RequestCounterService {
 
     private final RequestCounterRepository requestCounterRepository;
-    private final NameBasicsRepository basicsRepository;
 
     @Autowired
-    public RequestCounterServiceImpl(RequestCounterRepository requestCounterRepository, NameBasicsRepositoryImpl basicsRepository) {
+    public RequestCounterServiceImpl(RequestCounterRepository requestCounterRepository) {
         this.requestCounterRepository = requestCounterRepository;
-        this.basicsRepository = basicsRepository;
     }
 
     @Override
     public Integer getRequestCount() {
-
-        return requestCounterRepository.getRequestCounter();
+        return requestCounterRepository.getRequestCount();
     }
+
+    @Override
+    public void setRequestCount() {
+        requestCounterRepository.addRequestCount();
+    }
+
+
 }

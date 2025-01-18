@@ -10,11 +10,11 @@ public class RequestCount implements Serializable {
         counter = 0;
     }
 
-    public synchronized void setCounter(){
+    public synchronized void addCount(){
         counter++;
     }
 
-    public synchronized Integer getCounter(){
+    public synchronized Integer getCount(){
         return counter;
     }
 }

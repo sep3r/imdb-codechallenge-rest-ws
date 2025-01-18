@@ -1,6 +1,8 @@
 package com.lobox.imdb_codechallenge_rest_ws.controllers;
 
+import com.lobox.imdb_codechallenge_rest_ws.entities.Name_Basics;
 import com.lobox.imdb_codechallenge_rest_ws.entities.Title_Crew;
+import com.lobox.imdb_codechallenge_rest_ws.entities.Title_Ratings;
 import com.lobox.imdb_codechallenge_rest_ws.services.requests.RequestCounterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,18 +29,18 @@ public class IMDBRequestController {
     }
 
 
-    @GetMapping("/same-director-writer")
-    public List<Title_Crew> getSameDirectorWriterAlive() {
+    @GetMapping("/equal-director-writer-alive")
+    public List<Title_Crew> getEqualDirectorWriterAndlive() {
         return movieService.getSameDirectorWriterAlive();
     }
 
     @GetMapping("/actors")
-    public List<Title_Crew> getTitlesByActors(@RequestParam String actor1, @RequestParam String actor2) {
+    public List<Name_Basics> getTitlesByActors(@RequestParam String actor1, @RequestParam String actor2) {
         return movieService.getTitlesByActors(actor1, actor2);
     }
 
     @GetMapping("/genre")
-    public List<Title_Crew> getBestTitlesByGenre(@RequestParam String genre) {
+    public List<Title_Ratings> getBestTitlesByGenre(@RequestParam String genre) {
         return movieService.getBestTitlesByGenre(genre);
     }
 }

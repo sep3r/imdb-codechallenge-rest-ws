@@ -5,6 +5,8 @@ import com.lobox.imdb_codechallenge_rest_ws.entities.Name_Basics;
 import com.lobox.imdb_codechallenge_rest_ws.repositories.BaseRepository;
 import org.springframework.stereotype.Repository;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,18 +21,16 @@ public class NameBasicsRepositoryImpl extends BaseRepository implements NameBasi
     private static List<String> lines;
 
     public NameBasicsRepositoryImpl() {
-        Path filePath = Paths.get(path);
-        try {
-            // Read all lines from the file into a list
-            lines = Files.readAllLines(filePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Override
     synchronized public List<Name_Basics> initNameBasics() {
-        return List.of();
+        try (BufferedReader br = new BufferedReader(new FileReader("path"))) {
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

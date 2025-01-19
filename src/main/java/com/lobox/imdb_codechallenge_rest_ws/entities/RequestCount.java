@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class RequestCount implements Serializable {
 
+    //
     private static Integer counter;
 
     public RequestCount() {

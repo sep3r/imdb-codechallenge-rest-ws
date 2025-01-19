@@ -3,6 +3,7 @@ package com.lobox.imdb_codechallenge_rest_ws.controllers;
 import com.lobox.imdb_codechallenge_rest_ws.entities.Name_Basics;
 import com.lobox.imdb_codechallenge_rest_ws.entities.Title_Crew;
 import com.lobox.imdb_codechallenge_rest_ws.entities.Title_Ratings;
+import com.lobox.imdb_codechallenge_rest_ws.repositories.BaseRepository;
 import com.lobox.imdb_codechallenge_rest_ws.services.requests.RequestCounterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("count")
-public class IMDBRequestController {
+public class IMDBRequestController extends BaseController {
 
     private final RequestCounterService requestCounterService;
 

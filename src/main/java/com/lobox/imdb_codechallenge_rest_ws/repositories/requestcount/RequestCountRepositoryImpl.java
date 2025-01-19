@@ -5,7 +5,7 @@ import com.lobox.imdb_codechallenge_rest_ws.repositories.BaseRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class RequestCountRepositoryImpl implements RequestCounterRepository{
+public class RequestCountRepositoryImpl extends BaseRepository implements RequestCounterRepository{
 
     private RequestCount requestCount = new RequestCount();
 

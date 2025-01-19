@@ -19,7 +19,7 @@ public class RequestCounterAOP {
         this.requestCounterService = requestCounterService;
     }
 
-    @Before("execution(* com.lobox.imdb_codechallenge_rest_ws.*(..)) ")
+    @Before("execution(* com.lobox.imdb_codechallenge_rest_ws.controllers.*(..)) ")
     public void logNamaMethodUsage(JoinPoint joinPoint) {
         try {
             requestCounterService.setRequestCount();

@@ -1,5 +1,6 @@
 package com.lobox.imdb_codechallenge_rest_ws.repositories.titleepisode;
 
+import com.lobox.imdb_codechallenge_rest_ws.repositories.BaseRepository;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @Repository
-public class TitleEpisodeRepositoryImpl implements TitleEpisodeRepository {
+public class TitleEpisodeRepositoryImpl extends BaseRepository implements TitleEpisodeRepository {
 
     private final static String path = "src/main/resources/title.episode.tsv";
     private static List<String> lines;

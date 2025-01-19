@@ -1,13 +1,15 @@
 package com.lobox.imdb_codechallenge_rest_ws.repositories.titlecrew;
 
-import com.lobox.imdb_codechallenge_rest_ws.entities.Name_Basics;
 import com.lobox.imdb_codechallenge_rest_ws.entities.Title_Crew;
 import com.lobox.imdb_codechallenge_rest_ws.repositories.BaseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Repository;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,27 +18,31 @@ public class TitleCrewRepositoryImpl extends BaseRepository implements TitleCrew
 
     private final static String path = "src/main/resources/title.crew.tsv";
 
+    @Autowired
+    private ResourceLoader resourceLoader;
+
 
     @Override
     public synchronized List<Title_Crew> getSameDirectorWriterAlive() {
         List<Title_Crew> titleCrews = null;
-        try (BufferedReader br = new BufferedReader(new FileReader("path"))) {
-            String line;
-            titleCrews = new ArrayList<>();
-            while ((line = br.readLine()) != null) {
-                String[] str = line.split("\t");
-                if (str[1].trim().contains(str[2].trim())) {
-                    titleCrews.add(new Title_Crew(str[0], str[1], str[2]));
-                }
-                if (str[2].trim().contains(str[1].trim())) {
-                    titleCrews.add(new Title_Crew(str[0], str[1], str[2]));
+        try {
+            Resource resource = resourceLoader.getResource("classpath:title.crew.tsv");
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8))) {
+                String line;
+                titleCrews = new ArrayList<>();
+                while ((line = reader.readLine()) != null) {
+                    String[] str = line.split("\t");
+                    if (str[1].trim().contains(str[2].trim())) {
+                        titleCrews.add(new Title_Crew(str[0], str[1], str[2]));
+                    }
+                    if (str[2].trim().contains(str[1].trim())) {
+                        titleCrews.add(new Title_Crew(str[0], str[1], str[2]));
+                    }
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            log.error(e.getMessage());
         }
         return titleCrews;
     }
-
 }

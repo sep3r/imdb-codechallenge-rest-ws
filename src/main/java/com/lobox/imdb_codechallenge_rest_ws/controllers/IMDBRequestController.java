@@ -1,9 +1,7 @@
 package com.lobox.imdb_codechallenge_rest_ws.controllers;
 
 import com.lobox.imdb_codechallenge_rest_ws.entities.Name_Basics;
-import com.lobox.imdb_codechallenge_rest_ws.entities.Title_Crew;
 import com.lobox.imdb_codechallenge_rest_ws.entities.Title_Ratings;
-import com.lobox.imdb_codechallenge_rest_ws.repositories.BaseRepository;
 import com.lobox.imdb_codechallenge_rest_ws.services.requests.RequestCounterService;
 import com.lobox.imdb_codechallenge_rest_ws.services.titlecrew.TitleCrewService;
 import com.lobox.imdb_codechallenge_rest_ws.services.titlecrew.TitleCrewServiceImpl;
@@ -34,17 +32,17 @@ public class IMDBRequestController extends BaseController {
     }
 
 
-    @GetMapping("/equal-director-writer-alive")
-    public List<Title_Crew> getEqualDirectorWriterAndlive() {
+    @GetMapping("equal-director-writer-alive")
+    public List<Name_Basics> getEqualDirectorWriterAndlive() {
         return titleCrewService.getSameDirectorWriterAlive();
     }
 
-    @GetMapping("/actors")
+    @GetMapping("actors")
     public List<Name_Basics> getTitlesByActors(@RequestParam String actor1, @RequestParam String actor2) {
         return requestCounterService.getTitlesByActors(actor1, actor2);
     }
 
-    @GetMapping("/genre")
+    @GetMapping("genre")
     public List<Title_Ratings> getBestTitlesByGenre(@RequestParam String genre) {
         return requestCounterService.getBestTitlesByGenre(genre);
     }

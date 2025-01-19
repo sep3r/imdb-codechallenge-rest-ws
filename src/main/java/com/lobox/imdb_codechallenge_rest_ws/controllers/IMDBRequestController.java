@@ -5,6 +5,8 @@ import com.lobox.imdb_codechallenge_rest_ws.entities.Title_Crew;
 import com.lobox.imdb_codechallenge_rest_ws.entities.Title_Ratings;
 import com.lobox.imdb_codechallenge_rest_ws.repositories.BaseRepository;
 import com.lobox.imdb_codechallenge_rest_ws.services.requests.RequestCounterService;
+import com.lobox.imdb_codechallenge_rest_ws.services.titlecrew.TitleCrewService;
+import com.lobox.imdb_codechallenge_rest_ws.services.titlecrew.TitleCrewServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +20,12 @@ import java.util.List;
 public class IMDBRequestController extends BaseController {
 
     private final RequestCounterService requestCounterService;
+    private final TitleCrewService titleCrewService;
 
     @Autowired
-    public IMDBRequestController(RequestCounterService requestCounterService) {
+    public IMDBRequestController(RequestCounterService requestCounterService, TitleCrewServiceImpl titleCrewServiceImpl) {
         this.requestCounterService = requestCounterService;
+        this.titleCrewService = titleCrewServiceImpl;
     }
 
     @GetMapping("request-count")
@@ -32,7 +36,7 @@ public class IMDBRequestController extends BaseController {
 
     @GetMapping("/equal-director-writer-alive")
     public List<Title_Crew> getEqualDirectorWriterAndlive() {
-        return requestCounterService.getSameDirectorWriterAlive();
+        return titleCrewService.getSameDirectorWriterAlive();
     }
 
     @GetMapping("/actors")

@@ -13,14 +13,10 @@ import java.util.List;
 public class NameBasicsRepositoryImpl extends BaseRepository implements NameBasicsRepository {
 
     private static final String path = "src/main/resources/name.basics.tsv";
-    private static List<String> lines;
 
-    public NameBasicsRepositoryImpl() {
-
-    }
 
     @Override
-    synchronized public List<Name_Basics> initNameBasics() {
+    public synchronized List<Name_Basics> initNameBasics() {
         try (BufferedReader br = new BufferedReader(new FileReader("path"))) {
 
             String line;

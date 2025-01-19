@@ -13,15 +13,4 @@ import java.util.List;
 public class TitlePrincipalsRepositoryImpl extends BaseRepository implements TitlePrincipalsRepository {
 
     private final static String path = "src/main/resources/title.principals.tsv";
-    private static List<String> lines;
-
-    public TitlePrincipalsRepositoryImpl() {
-        Path filePath = Paths.get(path);
-        try {
-            // Read all lines from the file into a list
-            lines = Files.readAllLines(filePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

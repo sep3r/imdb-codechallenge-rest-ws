@@ -33,11 +33,6 @@ public class RequestCounterServiceImpl extends BaseService implements RequestCou
     }
 
     @Override
-    public List<Title_Crew> getSameDirectorWriterAlive() {
-        return List.of();
-    }
-
-    @Override
     public List<Name_Basics> getTitlesByActors(String actor1, String actor2) {
         return List.of();
     }

@@ -17,19 +17,18 @@ public class TitleCrewRepositoryImpl extends BaseRepository implements TitleCrew
     private final static String path = "src/main/resources/title.crew.tsv";
 
 
-
     @Override
-    synchronized public List<Title_Crew> initNameBasics() {
+    public synchronized List<Title_Crew> getSameDirectorWriterAlive() {
         List<Title_Crew> titleCrews = null;
         try (BufferedReader br = new BufferedReader(new FileReader("path"))) {
             String line;
             titleCrews = new ArrayList<>();
             while ((line = br.readLine()) != null) {
-                String[] str =  line.split("\t");
+                String[] str = line.split("\t");
                 if (str[1].trim().contains(str[2].trim())) {
                     titleCrews.add(new Title_Crew(str[0], str[1], str[2]));
                 }
-                if(str[2].trim().contains(str[1].trim())) {
+                if (str[2].trim().contains(str[1].trim())) {
                     titleCrews.add(new Title_Crew(str[0], str[1], str[2]));
                 }
             }

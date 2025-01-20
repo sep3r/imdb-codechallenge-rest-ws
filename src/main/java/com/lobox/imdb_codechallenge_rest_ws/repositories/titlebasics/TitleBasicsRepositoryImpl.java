@@ -24,23 +24,32 @@ public class TitleBasicsRepositoryImpl extends BaseRepository implements TitleBa
 
     @Override
     public List<Title_Basics> getTitleBasicsByGenre(String genre) throws ImdbException {
-        List<Title_Crew> titleCrews = null;
+        List<Title_Basics> titleBasics = null;
         try {
             Resource resource = resourceLoader.getResource("classpath:title.basics.tsv");
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8))) {
                 String line;
-                titleCrews = new ArrayList<>();
+                titleBasics = new ArrayList<>();
                 while ((line = reader.readLine()) != null) {
                     String[] str = line.split("\t");
-                    if (str[1].trim().contains(str[2].trim()) || str[2].trim().contains(str[1].trim())) {
-                        titleCrews.add(new Title_Crew(str[0], str[1], str[2]));
+                    if (str[8].contains(genre)) {
+                        titleBasics.add(new Title_Basics(str[0],
+                                str[1],
+                                str[2],
+                                str[3],
+                                str[4].equals("1"),
+                                Integer.valueOf(str[5]),
+                                Integer.valueOf(str[6]),
+                                Integer.valueOf(str[7]),
+                                str[8]));
                     }
                 }
             }
         } catch (Exception e) {
+            log.error(e.getMessage());
             e.printStackTrace();
             throw new ImdbException(e.getMessage(), 510);
         }
-        return titleCrews;
+        return titleBasics;
     }
 }

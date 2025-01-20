@@ -6,9 +6,11 @@ import com.lobox.imdb_codechallenge_rest_ws.repositories.titlebasics.TitleBasics
 import com.lobox.imdb_codechallenge_rest_ws.repositories.titlebasics.TitleBasicsRepositoryImpl;
 import com.lobox.imdb_codechallenge_rest_ws.services.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TitleBasicsServiceImpl extends BaseService implements TitleBasicsService {
 
     private final TitleBasicsRepository titleBasicsRepository;
@@ -20,6 +22,6 @@ public class TitleBasicsServiceImpl extends BaseService implements TitleBasicsSe
 
     @Override
     public List<Title_Basics> getTitleBasicsByGenre(String genre) throws ImdbException {
-        return List.of();
+        return ;
     }
 }

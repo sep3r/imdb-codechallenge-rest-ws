@@ -12,12 +12,12 @@ public class Title_Basics implements Serializable {
     public Integer startYear;
     public Integer endYear;
     public Integer runtimeMinutes;
-    public Set<String> genres;
+    public String genres;
 
     public Title_Basics() {
     }
 
-    public Title_Basics(String tconst, String titleType, String primaryTitle, String originalTitle, Boolean isAdult, Integer startYear, Integer endYear, Integer runtimeMinutes, Set<String> genres) {
+    public Title_Basics(String tconst, String titleType, String primaryTitle, String originalTitle, Boolean isAdult, Integer startYear, Integer endYear, Integer runtimeMinutes, String genres) {
         this.tconst = tconst;
         this.titleType = titleType;
         this.primaryTitle = primaryTitle;
@@ -93,11 +93,11 @@ public class Title_Basics implements Serializable {
         this.runtimeMinutes = runtimeMinutes;
     }
 
-    public Set<String> getGenres() {
+    public String getGenres() {
         return genres;
     }
 
-    public void setGenres(Set<String> genres) {
+    public void setGenres(String genres) {
         this.genres = genres;
     }
 }

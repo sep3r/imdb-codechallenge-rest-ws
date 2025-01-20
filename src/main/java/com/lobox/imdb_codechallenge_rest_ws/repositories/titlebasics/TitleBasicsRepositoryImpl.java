@@ -1,35 +1,46 @@
 package com.lobox.imdb_codechallenge_rest_ws.repositories.titlebasics;
 
-import com.lobox.imdb_codechallenge_rest_ws.entities.Title_Akas;
 import com.lobox.imdb_codechallenge_rest_ws.entities.Title_Basics;
+import com.lobox.imdb_codechallenge_rest_ws.entities.Title_Crew;
+import com.lobox.imdb_codechallenge_rest_ws.exceptions.ImdbException;
 import com.lobox.imdb_codechallenge_rest_ws.repositories.BaseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Repository;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
+
 
 @Repository
 public class TitleBasicsRepositoryImpl extends BaseRepository implements TitleBasicsRepository {
 
-    private final static String path = "src/main/resources/title.basics.tsv";
+    @Autowired
+    private ResourceLoader resourceLoader;
 
     @Override
-    public synchronized List<Title_Basics> getsom() {
-        try (BufferedReader br = new BufferedReader(new FileReader("path"))) {
-
-            String line;
-            while ((line = br.readLine()) != null) {
-
+    public List<Title_Basics> getTitleBasicsByGenre(String genre) throws ImdbException {
+        List<Title_Crew> titleCrews = null;
+        try {
+            Resource resource = resourceLoader.getResource("classpath:title.basics.tsv");
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8))) {
+                String line;
+                titleCrews = new ArrayList<>();
+                while ((line = reader.readLine()) != null) {
+                    String[] str = line.split("\t");
+                    if (str[1].trim().contains(str[2].trim()) || str[2].trim().contains(str[1].trim())) {
+                        titleCrews.add(new Title_Crew(str[0], str[1], str[2]));
+                    }
+                }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            log.error(e.getMessage());
+            throw new ImdbException(e.getMessage(), 510);
         }
-        return null;
+        return titleCrews;
     }
 }

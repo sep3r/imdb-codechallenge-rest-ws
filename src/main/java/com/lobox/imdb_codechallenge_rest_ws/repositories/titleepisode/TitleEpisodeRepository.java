@@ -6,5 +6,4 @@ import java.util.List;
 
 public interface TitleEpisodeRepository {
 
-    List<Title_Episode> getSameDirectorWriterAlive();
 }

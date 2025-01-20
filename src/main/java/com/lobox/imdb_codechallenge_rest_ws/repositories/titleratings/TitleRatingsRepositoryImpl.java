@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class TitleRatingsRepositoryImpl extends BaseRepository implements TitleRatingsRepository {
 
-    private final static String path = "src/main/resources/title.ratings.tsv";
+
 }

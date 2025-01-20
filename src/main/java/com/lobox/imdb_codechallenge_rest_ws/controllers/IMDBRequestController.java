@@ -53,7 +53,11 @@ public class IMDBRequestController extends BaseController {
     }
 
     @GetMapping("genre")
-    public List<Title_Ratings> getBestTitlesByGenre(@RequestParam String genre) {
+    public List<Title_Ratings> getBestTitlesByGenre(@RequestParam String genre) throws ImdbException {
+        if (genre != null && !genre.equals(""))
         return requestCounterService.getBestTitlesByGenre(genre);
+        else
+            throw new ImdbException(StaticValues.NULLDATASEND, 411);
+
     }
 }

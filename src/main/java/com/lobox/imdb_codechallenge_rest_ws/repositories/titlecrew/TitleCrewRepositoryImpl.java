@@ -17,11 +17,8 @@ import java.util.List;
 @Repository
 public class TitleCrewRepositoryImpl extends BaseRepository implements TitleCrewRepository {
 
-    private final static String path = "src/main/resources/title.crew.tsv";
-
     @Autowired
     private ResourceLoader resourceLoader;
-
 
     @Override
     public synchronized List<Title_Crew> getSameDirectorWriterAlive() throws ImdbException {

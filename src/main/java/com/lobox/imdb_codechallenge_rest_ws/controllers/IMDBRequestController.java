@@ -1,6 +1,8 @@
 package com.lobox.imdb_codechallenge_rest_ws.controllers;
 
+import com.lobox.imdb_codechallenge_rest_ws.StaticValues;
 import com.lobox.imdb_codechallenge_rest_ws.entities.Name_Basics;
+import com.lobox.imdb_codechallenge_rest_ws.entities.Title_Principals;
 import com.lobox.imdb_codechallenge_rest_ws.entities.Title_Ratings;
 import com.lobox.imdb_codechallenge_rest_ws.exceptions.ImdbException;
 import com.lobox.imdb_codechallenge_rest_ws.services.namebasic.NameBasicsService;
@@ -43,8 +45,11 @@ public class IMDBRequestController extends BaseController {
     }
 
     @GetMapping("actors")
-    public List<Name_Basics> getTitlesByActors(@RequestParam String actor1, @RequestParam String actor2) throws ImdbException {
-        return nameBasicsService.getTitlesByActors(actor1, actor2);
+    public List<Title_Principals> getTitlesByActors(@RequestParam String actor1, @RequestParam String actor2) throws ImdbException {
+        if(actor1!=null && actor2!=null&&!actor1.equals("")&&!actor2.equals(""))
+            return nameBasicsService.getTitlesByActors(actor1, actor2);
+        else
+            throw new ImdbException(StaticValues.NULLDATASEND, 411);
     }
 
     @GetMapping("genre")

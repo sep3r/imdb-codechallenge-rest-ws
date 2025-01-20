@@ -13,6 +13,4 @@ public interface RequestCounterService {
     void setRequestCount();
 
     List<Name_Basics> getTitlesByActors(String actor1, String actor2);
-
-    List<Title_Ratings> getBestTitlesByGenre(String genre);
 }

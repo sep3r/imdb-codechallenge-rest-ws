@@ -1,5 +1,7 @@
 package com.lobox.imdb_codechallenge_rest_ws.services.titlebasics;
 
+import com.lobox.imdb_codechallenge_rest_ws.StaticValues;
+import com.lobox.imdb_codechallenge_rest_ws.dtos.BestGenreTitleDTO;
 import com.lobox.imdb_codechallenge_rest_ws.entities.Title_Basics;
 import com.lobox.imdb_codechallenge_rest_ws.exceptions.ImdbException;
 import com.lobox.imdb_codechallenge_rest_ws.repositories.titlebasics.TitleBasicsRepository;
@@ -21,7 +23,16 @@ public class TitleBasicsServiceImpl extends BaseService implements TitleBasicsSe
     }
 
     @Override
-    public List<Title_Basics> getTitleBasicsByGenre(String genre) throws ImdbException {
-        return ;
+    public List<BestGenreTitleDTO> getTitleBasicsByGenre(String genre) throws ImdbException {
+
+        List<BestGenreTitleDTO> bestGenreTitleDTOS = null;
+
+        List<Title_Basics> titleBasics = titleBasicsRepository.getTitleBasicsByGenre(genre);
+        if (!titleBasics.isEmpty()) {
+            titleBasics.sort(Com);
+        }else{
+            throw new ImdbException(StaticValues.NOTFOUNDDATA, 200);
+        }
+        return bestGenreTitleDTOS;
     }
 }

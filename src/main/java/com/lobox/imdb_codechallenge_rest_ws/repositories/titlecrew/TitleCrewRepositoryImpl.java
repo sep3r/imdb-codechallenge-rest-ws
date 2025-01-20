@@ -1,6 +1,7 @@
 package com.lobox.imdb_codechallenge_rest_ws.repositories.titlecrew;
 
 import com.lobox.imdb_codechallenge_rest_ws.entities.Title_Crew;
+import com.lobox.imdb_codechallenge_rest_ws.exceptions.ImdbException;
 import com.lobox.imdb_codechallenge_rest_ws.repositories.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -23,7 +24,7 @@ public class TitleCrewRepositoryImpl extends BaseRepository implements TitleCrew
 
 
     @Override
-    public synchronized List<Title_Crew> getSameDirectorWriterAlive() {
+    public synchronized List<Title_Crew> getSameDirectorWriterAlive() throws ImdbException {
         List<Title_Crew> titleCrews = null;
         try {
             Resource resource = resourceLoader.getResource("classpath:title.crew.tsv");
@@ -32,16 +33,14 @@ public class TitleCrewRepositoryImpl extends BaseRepository implements TitleCrew
                 titleCrews = new ArrayList<>();
                 while ((line = reader.readLine()) != null) {
                     String[] str = line.split("\t");
-                    if (str[1].trim().contains(str[2].trim())) {
-                        titleCrews.add(new Title_Crew(str[0], str[1], str[2]));
-                    }
-                    if (str[2].trim().contains(str[1].trim())) {
+                    if (str[1].trim().contains(str[2].trim()) || str[2].trim().contains(str[1].trim())) {
                         titleCrews.add(new Title_Crew(str[0], str[1], str[2]));
                     }
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
+            throw new ImdbException(e.getMessage(), 510);
         }
         return titleCrews;
     }

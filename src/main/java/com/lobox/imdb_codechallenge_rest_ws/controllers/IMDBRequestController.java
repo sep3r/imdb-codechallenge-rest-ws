@@ -2,6 +2,9 @@ package com.lobox.imdb_codechallenge_rest_ws.controllers;
 
 import com.lobox.imdb_codechallenge_rest_ws.entities.Name_Basics;
 import com.lobox.imdb_codechallenge_rest_ws.entities.Title_Ratings;
+import com.lobox.imdb_codechallenge_rest_ws.exceptions.ImdbException;
+import com.lobox.imdb_codechallenge_rest_ws.services.namebasic.NameBasicsService;
+import com.lobox.imdb_codechallenge_rest_ws.services.namebasic.NameBasicsServiceImpl;
 import com.lobox.imdb_codechallenge_rest_ws.services.requests.RequestCounterService;
 import com.lobox.imdb_codechallenge_rest_ws.services.titlecrew.TitleCrewService;
 import com.lobox.imdb_codechallenge_rest_ws.services.titlecrew.TitleCrewServiceImpl;
@@ -19,11 +22,13 @@ public class IMDBRequestController extends BaseController {
 
     private final RequestCounterService requestCounterService;
     private final TitleCrewService titleCrewService;
+    private final NameBasicsService nameBasicsService;
 
     @Autowired
-    public IMDBRequestController(RequestCounterService requestCounterService, TitleCrewServiceImpl titleCrewServiceImpl) {
+    public IMDBRequestController(RequestCounterService requestCounterService, TitleCrewServiceImpl titleCrewServiceImpl, NameBasicsServiceImpl nameBasicsServiceImpl) {
         this.requestCounterService = requestCounterService;
         this.titleCrewService = titleCrewServiceImpl;
+        this.nameBasicsService = nameBasicsServiceImpl;
     }
 
     @GetMapping("request-count")
@@ -33,13 +38,13 @@ public class IMDBRequestController extends BaseController {
 
 
     @GetMapping("equal-director-writer-alive")
-    public List<Name_Basics> getEqualDirectorWriterAndlive() {
+    public List<Name_Basics> getEqualDirectorWriterAndlive() throws ImdbException {
         return titleCrewService.getSameDirectorWriterAlive();
     }
 
     @GetMapping("actors")
-    public List<Name_Basics> getTitlesByActors(@RequestParam String actor1, @RequestParam String actor2) {
-        return requestCounterService.getTitlesByActors(actor1, actor2);
+    public List<Name_Basics> getTitlesByActors(@RequestParam String actor1, @RequestParam String actor2) throws ImdbException {
+        return nameBasicsService.getTitlesByActors(actor1, actor2);
     }
 
     @GetMapping("genre")

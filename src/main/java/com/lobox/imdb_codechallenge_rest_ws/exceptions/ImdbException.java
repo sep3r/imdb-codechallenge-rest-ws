@@ -8,4 +8,13 @@ public class ImdbException extends Exception {
         super(message);
         this.code = code;
     }
+
+    public ImdbException(String message, Throwable cause, Integer code) {
+        super(message, cause);
+        this.code = code;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
 }
